@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WebApiDemoApp.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/recipes")]
     [ApiController]
     public class RecipesController : ControllerBase
     {
@@ -39,7 +39,7 @@ namespace WebApiDemoApp.Controllers
             return NoContent();
         }
 
-        [HttpDelete]
+        [HttpDelete("all")]
         public ActionResult DeleteRecipes()
         {
             bool error = false;
@@ -48,6 +48,23 @@ namespace WebApiDemoApp.Controllers
             {
                 return BadRequest();
             }
+
+            Console.WriteLine("Deleted all recipes");
+
+            return NoContent();
+        }
+
+        [HttpDelete("{index}")]
+        public ActionResult DeleteRecipes(int index)
+        {
+            bool error = false;
+
+            if (error)
+            {
+                return BadRequest();
+            }
+
+            Console.WriteLine($"Deleted recipe at index: {index}");
 
             return NoContent();
         }
