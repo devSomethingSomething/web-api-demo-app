@@ -11,7 +11,7 @@ namespace WebApiDemoApp.Controllers
     [ApiController]
     public class RecipesController : ControllerBase
     {
-        [HttpGet]
+        [HttpGet("all")]
         public ActionResult GetRecipes()
         {
             string[] recipes = { "Recipe 1", "Recipe 2", "Recipe 3" };
@@ -22,6 +22,19 @@ namespace WebApiDemoApp.Controllers
             }
 
             return Ok(recipes);
+        }
+
+        [HttpGet]
+        public ActionResult GetRecipes([FromQuery]int count)
+        {
+            string[] recipes = { "Recipe 1", "Recipe 2", "Recipe 3" };
+
+            if (!recipes.Any())
+            {
+                return NotFound();
+            }
+
+            return Ok(recipes.Take(count));
         }
 
         [HttpPut]
