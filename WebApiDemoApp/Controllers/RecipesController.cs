@@ -12,11 +12,44 @@ namespace WebApiDemoApp.Controllers
     public class RecipesController : ControllerBase
     {
         [HttpGet]
-        public string[] GetDishes()
+        public ActionResult GetRecipes()
         {
-            string[] dishes = { "Dish 1", "Dish 2", "Dish 3" };
+            string[] recipes = { "Recipe 1", "Recipe 2", "Recipe 3" };
 
-            return dishes;
+            if (!recipes.Any())
+            {
+                return NotFound();
+            }
+
+            return Ok(recipes);
+        }
+
+        [HttpPut]
+        public ActionResult UpdateRecipes(int index, string recipe)
+        {
+            string[] recipes = { "Recipe 1", "Recipe 2", "Recipe 3" };
+
+            if (!recipes.Any())
+            {
+                return NotFound();
+            }
+
+            recipes[index] = recipe;
+
+            return NoContent();
+        }
+
+        [HttpDelete]
+        public ActionResult DeleteRecipes()
+        {
+            bool error = false;
+
+            if (error)
+            {
+                return BadRequest();
+            }
+
+            return NoContent();
         }
     }
 }
